@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shop</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body cz-shortcut-listen="true">
+  <header>
+    <h1>Header</h1>
+  </header>
+  <div class="container">
+    <div class="list-blog">
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Modi sunt eveniet maxime magni in, nostrum
+        facilis, temporibus, quam facere sint est blanditiis harum dicta. Tempore suscipit ut hic. Deleniti,
+        qui.</p>
+    </div>
+    <div id="app">
+      <div class="cart">Giỏ hàng ({{ numberCard }})</div>
+      <div class="product">
+        <div class="product-image">
+          <div class="image"><img v-bind:src="getProduct.image" alt=""></div>
+        </div>
+        <div class="product-content">
+          <h3 class="title"><a
+              href="https://www.lazada.vn/products/ao-thun-nam-the-thao-hang-vnxk-vai-day-min-vai-dom-i265780948-s382816279.html"
+              target="_blank">{{ title }}</a></h3>
+          <p class="brand">Thương hiệu: No brand</p>
+          <p class="quantity" v-if="getProduct.quantity > 0">Còn lại: {{ getProduct.quantity }} Sản phẩm</p>
+          <p class="quantity" v-if="getProduct.quantity <= 0">Sản phẩm đã hết hàng</p>
+          <!---->
+          <div class="wrapper-price">
+            <div class="final-price">{{ formatFinalPrice }}&nbsp;</div>
+            <div class="origin-price">{{ formatOriginalPrice }}&nbsp;</div>
+            <div class="sale-price">-{{ sales*100 }}%</div>
+          </div>
+          <div class="wrapper-color">
+            <div class="text">Màu sắc</div>
+            <div class="list-color">
+              <p class="color-text">{{ getProduct.color }}</p>
+              <ul>
+                <li v-for="(item, index) in listProducts" v-bind:class="classActive(index)" v-bind:key="index"
+                  v-on:click="handleClickColor($event, index)">
+                  <img v-bind:src="item.image" v-bind:alt="item.color">
+                </li>
+                <!-- <li class=""><img src="./images/red.jpg" alt="Màu Đỏ"></li>
+                <li class=""><img src="./images/blue.jpg" alt="Màu Xanh"></li> -->
+              </ul>
+            </div>
+          </div> <button class="add-to-cart" v-on:click="addCard">Add to cart</button>
+        </div>
+      </div>
+      <div class="description">
+        <ul class="extra-info">
+          <li v-for="item in listDesc">{{ item }}</li>
+        </ul>
+        <h2>Chất liệu bền chặt&nbsp;</h2>
+        
+        <div v-html="info">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <h1>Footer</h1>
+  </footer>
+  <script src="main.js"></script>
+</body>
+
+</html>
